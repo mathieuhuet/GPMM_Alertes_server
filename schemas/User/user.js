@@ -7,8 +7,6 @@ const userSchema = new Schema({
   email: String,
   profileIconColor: String,
   profileIconBackgroundColor: String,
-  profileIconPolice: String,
-  verified: Boolean,
   online: Boolean
 });
 
