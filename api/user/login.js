@@ -12,7 +12,7 @@ const login = (req, res) => {
   if (email === "") {
     res.status(400).json({
       error: true,
-      message: "Empty input fields",
+      message: "Veuillez entrer votre adresse courriel",
       data: null
     });
   } else {
@@ -23,7 +23,7 @@ const login = (req, res) => {
       } else {
         res.status(403).json({
           error: true,
-          message: "There's no user with this email, please create an account.",
+          message: "Il n'y a pas d'utilisateur avec ce courriel,\ncontacter votre administrateur réseau.",
           data: null
         });
       }
@@ -31,7 +31,7 @@ const login = (req, res) => {
       console.log(err);
       res.status(500).json({
         error: true,
-        message: "An error occured while checking for existing user.",
+        message: "Une erreur s'est produit lors de la vérification de l'utilisateur,\n réessayer.",
         data: null
       })
     })

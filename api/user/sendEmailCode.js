@@ -36,11 +36,11 @@ const sendVerificationEmail = ({email}, res) => {
         if (data.length) {
           UserVerification.deleteMany({email}).then(() => {
             const mailOptions = {
-              from: `FriendlyBets <${secret.AUTH_EMAIL}>`,
+              from: `GPMM Alertes <${secret.AUTH_EMAIL}>`,
               to: email,
-              subject: "Login code for FriendlyBets",
-              html: `<h1>${code}</h1><p>This is the code to complete the registration or login into your account.</p>` + 
-              `<p>This code <b>expires in 10 minutes.</b></p>`,
+              subject: "Code d'accès pour l'application GPMM Alertes",
+              html: `<p>Voici le code pour vous connecter à votre compte.</p>` + 
+              `<p>Ce code <b>expire dans 10 minutes.</b></p><h1>${code}</h1>`,
             };
             const newVerification = new UserVerification({
               email: email,
