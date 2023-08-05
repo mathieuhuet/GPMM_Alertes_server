@@ -12,7 +12,7 @@ const getUserInfo = (req, res) => {
   };
   res.status(200).json({
     error: false,
-    message: "Successfully retrieve user info.",
+    message: "Les informations à propos de l'utilisateur ont bien été récolté",
     data: data
   })
 };

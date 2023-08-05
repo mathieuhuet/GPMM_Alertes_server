@@ -10,7 +10,7 @@ const authMiddleware = async (req, res, next) => {
   if (!authHeaders) {
     return res.status(403).json({
       error: true,
-      message: "AccessToken Authorization missing",
+      message: "Il manque le AccessToken pour bien effectuer la requête",
       data: null
     });
   }
@@ -23,7 +23,7 @@ const authMiddleware = async (req, res, next) => {
     if (!user) {
       return res.status(401).json({
         error: true,
-        message: "Authorization refused.",
+        message: "Autorisation refuser, le AccessToken ne correspond à aucun des AccessToken dans notre base de donnée",
         data: null
       });
     }
@@ -32,7 +32,7 @@ const authMiddleware = async (req, res, next) => {
   } catch (error) {
     res.status(401).json({
       error: true,
-      message: "Error Auhtorization",
+      message: "Erreur lors de l'autorisation.",
       data: null
     });
   }

@@ -14,7 +14,7 @@ const verify = (req, res) => {
     if (data.length && data[0].expiresAt < Date.now()) {
       res.status(403).json({
         error: true,
-        message: "Can't verify your login code, last login code has expire because it has been sent over than 10 minutes ago.",
+        message: "Incapable de vérifier le code de connection parce que le code à été envoyé il y a plus de 10 minutes",
         data: null
       })
       // delete verification because it has expired., so no need to keep it.
@@ -23,7 +23,7 @@ const verify = (req, res) => {
     } else if (data.length && (loginCode !== data[0].loginCode)) {
       res.status(403).json({
         error: true,
-        message: "The code you entered didn't match, check that you properly entered the code or ask for a new one.",
+        message: "Le code que vous avez entré ne correspond pas à celui qu'on vous a envoyé,\nvérifier le dernier code que vous avez reçu ou demander un nouveau code de connection.",
         data: null
       })
     } else if (data.length && (loginCode === data[0].loginCode)) {
@@ -35,7 +35,7 @@ const verify = (req, res) => {
             const accessToken = jwt.sign({ _id }, secret.SECRET_KEY);
             res.status(200).json({
               error: false,
-              message: "Verification was successful.",
+              message: "Vérification avec succès",
               data: {accessToken}
             })
           }
@@ -43,7 +43,7 @@ const verify = (req, res) => {
           console.log(err);
           res.status(500).json({
             error: true,
-            message: "An internal error occured. Please try again.",
+            message: "Une erreur interne s'est produit, réessayer.",
             data: null
           })
         })
@@ -54,14 +54,14 @@ const verify = (req, res) => {
         console.log(err);
         res.status(500).json({
           error: true,
-          message: "The code you entered was good. But an internal error occured while validating the user, try again please.",
+          message: "Le code de connection que vous avez entré est bon,\nmais une erreur interne à empêcher votre connection, réessayer.",
           data: null
         })
       })
     } else {
       res.status(500).json({
         error: true,
-        message: "An error occured while checking for existing email verification code",
+        message: "Une erreur s'est produite lors de la vérification de votre code, réessayer",
         data: null
       })
     }
@@ -69,7 +69,7 @@ const verify = (req, res) => {
     console.log(err);
     res.status(500).json({
       error: true,
-      message: "An error occured while checking for existing email verification code",
+      message: "Une erreur s'est produite lors de la vérification de votre code, réessayer",
       data: null
     })
   })

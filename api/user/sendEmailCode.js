@@ -29,7 +29,7 @@ const sendVerificationEmail = ({email}, res) => {
       if (data.length && (data[0].createdAt + 30000) > Date.now()) {
         res.status(403).json({
           error: true,
-          message: "Previous code has been sent less than 30 seconds ago, you have to wait 30 seconds to request a new code.",
+          message: "Le dernier code à été envoyé il y a moins de 30 secondes,\nil faut attendre 30 secondes pour demander un nouveau code.",
           data: null
         })
       } else {
@@ -40,7 +40,7 @@ const sendVerificationEmail = ({email}, res) => {
               to: email,
               subject: "Code d'accès pour l'application GPMM Alertes",
               html: `<p>Voici le code pour vous connecter à votre compte.</p>` + 
-              `<p>Ce code <b>expire dans 10 minutes.</b></p><h1>${code}</h1>`,
+              `<p>Ce code <b>expire dans 10 minutes.</b></p><h1>${code}</h1>`
             };
             const newVerification = new UserVerification({
               email: email,
@@ -53,14 +53,14 @@ const sendVerificationEmail = ({email}, res) => {
                 // email sent and verification revord saved
                 res.status(201).json({
                   error: false,
-                  message: 'Account created. Account found. Email verification code sent.',
+                  message: 'Compte créer et compte trouvé,\nle courriel de vérification a été envoyé',
                   data: {email: email}
                 })
               }).catch(err => {
                 console.log(err);
                 res.status(500).json({
                   error: true,
-                  message: "Verification email code failed",
+                  message: "Échec de l'envoi du courriel de vérification",
                   data: null
                 })
               })
@@ -68,7 +68,7 @@ const sendVerificationEmail = ({email}, res) => {
               console.log(err);
               res.status(500).json({
                 error: true,
-                message: "Couldnt save verification email data in database",
+                message: "Erreur lors de la sauvegarde du code de vérification dans la base de donnée",
                 data: null
               })
             })
@@ -76,17 +76,17 @@ const sendVerificationEmail = ({email}, res) => {
             console.log(err);
             res.status(500).json({
               error: true,
-              message: "Couldnt delete previous code from database.",
+              message: "Incapable de supprimer le code précédent de la base de donnée",
               data: null
             })
           });
         } else {
           const mailOptions = {
-            from: `FriendlyBets <${secret.AUTH_EMAIL}>`,
+            from: `GPMM Alertes <${secret.AUTH_EMAIL}>`,
             to: email,
-            subject: "Login code for FriendlyBets",
-            html: `<h1>${code}</h1><p>This is the code to complete the registration or login into your FriendlyBets account.</p>` + 
-            `<p>This code <b>expires in 10 minutes.</b></p>`,
+            subject: "Code d'accès pour l'application GPMM Alertes",
+            html: `<p>Voici le code pour vous connecter à votre compte.</p>` + 
+            `<p>Ce code <b>expire dans 10 minutes.</b></p><h1>${code}</h1>`
           };
           const newVerification = new UserVerification({
             email: email,
@@ -99,14 +99,14 @@ const sendVerificationEmail = ({email}, res) => {
               // email sent and verification revord saved
               res.status(201).json({
                 error: false,
-                message: 'Account created, Account found. Email verification code sent.',
+                message: 'Compte créer et compte trouvé,\nle courriel de vérification a été envoyé',
                 data: {email: email}
               })
             }).catch(err => {
               console.log(err);
               res.status(500).json({
                 error: true,
-                message: "Verification email code failed",
+                message: "Échec de l'envoi du courriel de vérification",
                 data: null
               })
             })
@@ -114,7 +114,7 @@ const sendVerificationEmail = ({email}, res) => {
             console.log(err);
             res.status(500).json({
               error: true,
-              message: "Couldnt save verification email data in database",
+              message: "Erreur lors de la sauvegarde du code de vérification dans la base de donnée",
               data: null
             })
           })
@@ -124,7 +124,7 @@ const sendVerificationEmail = ({email}, res) => {
       console.log(err);
       res.status(500).json({
         error: true,
-        message: "Failed to fetch from database",
+        message: "Incapable d'aller chercher les données de la base de donnée",
         data: null
       })
     })
@@ -132,7 +132,7 @@ const sendVerificationEmail = ({email}, res) => {
     console.log(err);
     res.status(500).json({
       error: true,
-      message: "An error occurred while creating the login code.",
+      message: "Une erreur s'est produite lors de la création du code de connection",
       data: null
     })
   })

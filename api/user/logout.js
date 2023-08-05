@@ -9,14 +9,14 @@ const logout = (req, res) => {
   User.updateOne({email}, {online: false}).then(() => {
     res.status(200).json({
       error: false,
-      message: "Verification was successful.",
+      message: "Déconnection fut un succès",
       data: true
     })
   }).catch((err) => {
     console.log(err);
     res.status(500).json({
       error: true,
-      message: "Internal error occured while logging you out, try again please.",
+      message: "Une erreur interne s'est produite lorsqu'on a essayé de vous déconnecter.",
       data: null
     })
   })
