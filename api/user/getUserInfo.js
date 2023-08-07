@@ -5,10 +5,11 @@ const getUserInfo = (req, res) => {
     firstName: req.user.firstName, 
     lastName: req.user.lastName, 
     email: req.user.email,
+    role: req.user.role,
+    departement: req.user.departement,
     profileIconColor: req.user.profileIconColor,
     profileIconBackgroundColor: req.user.profileIconBackgroundColor,
     profileIconPolice: req.user.profileIconPolice,
-    _id: req.user._id
   };
   res.status(200).json({
     error: false,

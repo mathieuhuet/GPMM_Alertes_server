@@ -1,14 +1,10 @@
 const mongoUserDB = require('../../config/mongoUser');
-
 const User = mongoUserDB.model('users', require('../../schemas/User/user'));
-
 const getRandomColor = require('../../utils/getRandomColor');
-
-const sendVerificationEmail = require('./sendEmailCode');
 
 
 const register = (req, res) => {
-  let {firstName, lastName, email} = req.body;
+  let {firstName, lastName, email, role, departement} = req.body;
   // remove white-space
   firstName = firstName.trim();
   lastName = lastName.trim();
@@ -16,25 +12,25 @@ const register = (req, res) => {
   if ( firstName === "" || email === "") {
     res.status(400).json({
       error: true,
-      message: "Empty input fields",
+      message: "Remplissez tout les champs.",
       data: null
     });
-  } else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ]*$/.test(firstName)) {
+  } else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ -]*$/.test(firstName)) {
     res.status(400).json({
       error: true,
-      message: "Invalid first name format",
+      message: "Prénom invalide",
       data: null
     });
-  } else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ]*$/.test(lastName)) {
+  } else if (!/^[A-Za-zÀ-ÖØ-öø-ÿ -]*$/.test(lastName)) {
     res.status(400).json({
       error: true,
-      message: "Invalid last name format",
+      message: "Nom de famille invalide",
       data: null
     });
   } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
     res.status(400).json({
       error: true,
-      message: "Invalid user email address",
+      message: "Adresse courriel invalide.",
       data: null
     });
   } else {
@@ -48,7 +44,7 @@ const register = (req, res) => {
       if (result.length) {
         res.status(403).json({
           error: true,
-          message: "User with this email address already exist.",
+          message: "Utilisateur avec ce courriel existe déjà",
           data: null
         });
       } else {
@@ -57,20 +53,24 @@ const register = (req, res) => {
           firstName,
           lastName,
           email,
+          role,
+          departement,
+          accessToken: '',
           profileIconColor: 'white',
           profileIconBackgroundColor: backgroundColor,
-          profileIconPolice: 'normal',
-          verified: false,
           online: false
         });
         newUser.save().then(result => {
-          // Handle account verification
-          sendVerificationEmail(result, res);
+          res.status(201).json({
+            error: false,
+            message: 'Compte créer avec succès.',
+            data: result
+          })
         }).catch(err => {
           console.log(err);
           res.status(500).json({
             error: true,
-            message: "An error occured when saving the new user to the database.",
+            message: "Une erreure s'est produite dans la base de donnée.",
             data: null
           });
         });
@@ -79,7 +79,7 @@ const register = (req, res) => {
       console.log(err);
       res.status(500).json({
         error: true,
-        message: "An error occured while checking if user already exist.",
+        message: "Une erreure s'est produite durant la vérification d'un utilisateur existant avec ce courriel.",
         data: null
       });
     })

@@ -17,9 +17,9 @@ const authMiddleware = async (req, res, next) => {
   const accessToken = authHeaders.split(' ')[1];
   try {
     // verify & decode token payload,
-    const { _id } = jwt.verify(accessToken, secret.SECRET_KEY);
+    const accessTokenReceived = jwt.verify(accessToken, secret.SECRET_KEY);
     // attempt to find user object and set to req
-    const user = await User.findOne({ _id });
+    const user = await User.findOne({ accessToken: accessTokenReceived.accessToken });
     if (!user) {
       return res.status(401).json({
         error: true,
@@ -30,6 +30,7 @@ const authMiddleware = async (req, res, next) => {
     req.user = user;
     next();
   } catch (error) {
+    console.log(error);
     res.status(401).json({
       error: true,
       message: "Erreur lors de l'autorisation.",

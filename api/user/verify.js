@@ -1,13 +1,16 @@
 const secret = require('../../secret');
 const jwt = require('jsonwebtoken');
 const mongoUserDB = require('../../config/mongoUser');
+// Generating accesstoken.
+const bcrypt = require('bcrypt');
+const { v4: uuidv4 } = require('uuid');
 
 const UserVerification = mongoUserDB.model('userVerification', require('../../schemas/User/userVerification'));
 const User = mongoUserDB.model('users', require('../../schemas/User/user'));
 
 
 // Verify code sent by the user for a successful login.
-const verify = (req, res) => {
+const verify = async (req, res) => {
   let {email, loginCode} = req.body;
   email = email.trim();
   UserVerification.find({email}).then((data) => {
@@ -27,16 +30,17 @@ const verify = (req, res) => {
         data: null
       })
     } else if (data.length && (loginCode === data[0].loginCode)) {
-      User.updateOne({email}, {verified: true, online: true}).then(() => {
+      const uniqueString = uuidv4();
+      User.updateOne({email}, {online: true, accessToken: uniqueString}).then(() => {
         // Finding the user in the db just so we can get his _id variable 
         User.find({email}).then(data => {
           if (data.length) {
-            const _id = data[0]._id;
-            const accessToken = jwt.sign({ _id }, secret.SECRET_KEY);
+            const accessToken = data[0].accessToken;
+            const token = jwt.sign({accessToken}, secret.SECRET_KEY);
             res.status(200).json({
               error: false,
               message: "Vérification avec succès",
-              data: {accessToken}
+              data: {token}
             })
           }
         }).catch(err => {

@@ -5,8 +5,11 @@ const userSchema = new Schema({
   firstName: String,
   lastName: String,
   email: String,
+  role: String,
+  departement: String,
   profileIconColor: String,
   profileIconBackgroundColor: String,
+  accessToken: String,
   online: Boolean
 });
 
