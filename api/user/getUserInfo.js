@@ -10,6 +10,7 @@ const getUserInfo = (req, res) => {
     profileIconColor: req.user.profileIconColor,
     profileIconBackgroundColor: req.user.profileIconBackgroundColor,
     profileIconPolice: req.user.profileIconPolice,
+    _id: req.user._id
   };
   res.status(200).json({
     error: false,
