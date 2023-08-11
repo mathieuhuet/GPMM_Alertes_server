@@ -1,4 +1,4 @@
-const mongoSiteDB = require('../../config/mongoActivity');
+const mongoSiteDB = require('../../config/mongoSite');
 
 const Site = mongoSiteDB.model('sites', require('../../schemas/Site/site'));
 
@@ -13,7 +13,7 @@ const fetchSites = (req, res) => {
         error: false,
         message: "Les sites ont bien été récolté",
         data: data
-      })
+      });
     } else {
       res.status(403).json({
         error: true,
@@ -27,7 +27,7 @@ const fetchSites = (req, res) => {
       error: true,
       message: "Une erreur s'est produit lors de la recherche des sites,\n réessayer.",
       data: null
-    })
+    });
   })
 };
 

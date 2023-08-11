@@ -5,9 +5,7 @@ const Activity = mongoActivityDB.model('activities', require('../../schemas/Acti
 
 const fetchActivities = (req, res) => {
 
-  // MATHIEU CHECK POUR TROUVÉ LES ACTIVITÉ DANS LA BD (base de donnée)
-  let {email} = req.body;
-  Activity.find({email}).then(data => {
+  Activity.find().then(data => {
     // if (data.length) === activity found
     if (data.length) {
       res.status(200).json({

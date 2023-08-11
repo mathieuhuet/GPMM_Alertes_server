@@ -2,8 +2,7 @@ const mongoActivityDB = require('../../config/mongoActivity');
 const Activity = mongoActivityDB.model('activities', require('../../schemas/Activity/activity'));
 
 
-const postActivity
- = (req, res) => {
+const postActivity = (req, res) => {
   let {title, description, creator, dateCreated, activityDate, level, department, employee, site, system} = req.body;
   if ( title === "" || description === "") {
     res.status(400).json({
