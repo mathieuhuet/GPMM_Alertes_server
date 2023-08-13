@@ -11,7 +11,8 @@ const activitySchema = new Schema({
   department: String,
   employee: String,
   site: String,
-  system: String
+  system: String,
+  activityType: String,
 });
 
 

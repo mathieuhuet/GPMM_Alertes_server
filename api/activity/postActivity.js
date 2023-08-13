@@ -26,7 +26,8 @@ const postActivity = (req, res) => {
       department,
       employee,
       site,
-      system
+      system,
+      acquiter: false
     });
     newActivity.save().then(result => {
       res.status(201).json({
