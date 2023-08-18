@@ -9,6 +9,7 @@ const verify = require('./verify');
 const getUserInfo = require('./getUserInfo');
 const deleteAccount = require('./deleteAccount');
 const changeIcon = require('./changeIcon');
+const getOtherUserInfo = require('./getOtherUserInfo');
 
 
 
@@ -19,6 +20,7 @@ router.post('/verify', verify);
 router.get('/getUserInfo', authMiddleware, getUserInfo);
 router.post('/logout', authMiddleware, logout);
 router.put('/changeIcon', authMiddleware, changeIcon);
+router.post('/getOtherUserInfo', authMiddleware, getOtherUserInfo);
 
 
 module.exports = router;

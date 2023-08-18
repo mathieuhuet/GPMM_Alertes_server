@@ -12,6 +12,7 @@ const postComments = require('./postComments');
 const postGeneralAcquit = require('./postGeneralAcquit');
 const postInterventionAcquit = require('./postInterventionAcquit');
 const postRoutineAcquit = require('./postRoutineAcquit');
+const reportComment = require('./reportComment');
 
 
 router.post('/postActivity', authMiddleware, postActivity);
@@ -24,6 +25,7 @@ router.post('/postInterventionAcquit', authMiddleware, postInterventionAcquit);
 router.post('/postRoutineAcquit', authMiddleware, postRoutineAcquit);
 router.post('/fetchAcquit', authMiddleware, fetchAcquit);
 router.post('/fetchComments', authMiddleware, fetchComments);
+router.post('/reportComment', authMiddleware, reportComment);
 
 
 module.exports = router;
