@@ -9,7 +9,7 @@ const activitySchema = new Schema({
   activityDate: Date,
   level: String,
   department: String,
-  employee: String,
+  employee: Array,
   site: String,
   system: String,
   activityType: String,
