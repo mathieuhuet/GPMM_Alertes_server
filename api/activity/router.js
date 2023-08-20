@@ -3,7 +3,7 @@ const router = require('express').Router();
 const authMiddleware = require('../../middlewares/auth');
 
 const postActivity = require('./postActivity');
-const fetchActivities = require('./fetchActivity');
+const fetchActivities = require('./fetchActivities');
 const fetchActivitiesBySite = require('./fetchActivitiesBySite')
 const deleteActivity = require('./deleteActivity');
 const fetchAcquit = require('./fetchAcquit');

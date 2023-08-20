@@ -3,7 +3,7 @@ const Activity = mongoActivityDB.model('activities', require('../../schemas/Acti
 
 
 const postActivity = (req, res) => {
-  let {title, description, creator, dateCreated, activityDate, level, department, employee, site, system} = req.body;
+  let {title, description, creator, dateCreated, activityDate, type, level, department, employee, site, system} = req.body;
   if ( title === "" || description === "") {
     res.status(400).json({
       error: true,
@@ -22,12 +22,13 @@ const postActivity = (req, res) => {
       creator,
       dateCreated,
       activityDate,
+      type,
       level,
       department,
       employee,
       site,
       system,
-      acquiter: false
+      acquit: false
     });
     newActivity.save().then(result => {
       res.status(201).json({

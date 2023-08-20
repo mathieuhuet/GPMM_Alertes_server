@@ -1,6 +1,6 @@
 const mongoActivityDB = require('../../config/mongoActivity');
 const Activity = mongoActivityDB.model('activities', require('../../schemas/Activity/activity'));
-
+const Comments = mongoActivityDB.model('comments', require('../../schemas/Activity/comments'));
 
 const deleteActivity = async (req, res) => {
   try {
@@ -11,6 +11,7 @@ const deleteActivity = async (req, res) => {
         message: "ID de l'activité manque à la requête"
       });
     } else {
+      const comments = await Comments.deleteMany({activityId: _idActivity});
       const result = await Activity.deleteOne({_id: _idActivity});
       res.status(200).json({
         error: false,

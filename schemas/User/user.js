@@ -7,6 +7,7 @@ const userSchema = new Schema({
   email: String,
   role: String,
   departement: String,
+  admin: Boolean,
   profileIconColor: String,
   profileIconBackgroundColor: String,
   accessToken: String,

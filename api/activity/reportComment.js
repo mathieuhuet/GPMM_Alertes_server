@@ -19,14 +19,14 @@ const reportComment = (req, res) => {
       message: "Le commentaire à été report avec succès",
       data: data
     })
-  }).catch((err) => {
-    console.log(err);
-    res.status(500).json({
-      error: true,
-      message: "Erreur interne, réessayer.",
-      data: null
+    }).catch((err) => {
+      console.log(err);
+      res.status(500).json({
+        error: true,
+        message: "Erreur interne, réessayer.",
+        data: null
+      })
     })
-  })
   }
 };
 

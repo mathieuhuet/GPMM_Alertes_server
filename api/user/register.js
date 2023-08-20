@@ -4,7 +4,7 @@ const getRandomColor = require('../../utils/getRandomColor');
 
 
 const register = (req, res) => {
-  let {firstName, lastName, email, role, departement} = req.body;
+  let {firstName, lastName, email, role, departement, admin} = req.body;
   // remove white-space
   firstName = firstName.trim();
   lastName = lastName.trim();
@@ -55,6 +55,7 @@ const register = (req, res) => {
           email,
           role,
           departement,
+          admin,
           accessToken: '',
           profileIconColor: 'white',
           profileIconBackgroundColor: backgroundColor,

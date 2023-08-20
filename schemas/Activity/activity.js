@@ -7,12 +7,14 @@ const activitySchema = new Schema({
   creator: String,
   dateCreated: Date,
   activityDate: Date,
+  type: String,
   level: String,
   department: String,
   employee: Array,
   site: String,
   system: String,
   activityType: String,
+  acquit: Boolean,
 });
 
 

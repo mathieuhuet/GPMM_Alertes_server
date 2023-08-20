@@ -10,7 +10,7 @@ const fetchActivities = (req, res) => {
     if (data.length) {
       res.status(200).json({
         error: false,
-        message: "Les activité ont bien été récolté",
+        message: "Les activitées ont bien été récolté",
         data: data
       })
     } else {
