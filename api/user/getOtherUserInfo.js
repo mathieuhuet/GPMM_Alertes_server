@@ -11,7 +11,18 @@ const getOtherUserInfo = (req, res) => {
       res.status(200).json({
         error: false,
         message: "L'usagé ont bien été récolté",
-        data: data[0]
+        data: {
+          firstName: data[0].firstName, 
+          lastName: data[0].lastName, 
+          email: data[0].email,
+          role: data[0].role,
+          admin: data[0].admin,
+          departement: data[0].departement,
+          profileIconColor: data[0].profileIconColor,
+          profileIconBackgroundColor: data[0].profileIconBackgroundColor,
+          profileIconPolice: data[0].profileIconPolice,
+          _id: data[0]._id.toString()
+        }
       })
     } else {
       res.status(403).json({

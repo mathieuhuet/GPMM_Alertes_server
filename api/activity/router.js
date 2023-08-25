@@ -4,7 +4,8 @@ const authMiddleware = require('../../middlewares/auth');
 
 const postActivity = require('./postActivity');
 const fetchActivities = require('./fetchActivities');
-const fetchActivitiesBySite = require('./fetchActivitiesBySite')
+const fetchActivitiesBySite = require('./fetchActivitiesBySite');
+const fetchActivitiesByDepartment = require('./fetchActivitiesByDepartment');
 const deleteActivity = require('./deleteActivity');
 const fetchAcquit = require('./fetchAcquit');
 const fetchComments = require('./fetchComments');
@@ -18,6 +19,7 @@ const reportComment = require('./reportComment');
 router.post('/postActivity', authMiddleware, postActivity);
 router.get('/fetchActivities', authMiddleware, fetchActivities);
 router.post('/fetchActivitiesBySite', authMiddleware, fetchActivitiesBySite);
+router.post('/fetchActivitiesByDepartment', authMiddleware, fetchActivitiesByDepartment);
 router.post('/deleteActivity', authMiddleware, deleteActivity);
 router.post('/postComments', authMiddleware, postComments);
 router.post('/postGeneralAcquit', authMiddleware, postGeneralAcquit);
