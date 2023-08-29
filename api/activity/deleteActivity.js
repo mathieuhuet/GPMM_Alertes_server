@@ -1,10 +1,12 @@
 const mongoActivityDB = require('../../config/mongoActivity');
-const Activity = mongoActivityDB.model('activities', require('../../schemas/Activity/activity'));
+const Intervention = mongoActivityDB.model('intervention', require('../../schemas/Activity/intervention'));
+const Routine = mongoActivityDB.model('routine', require('../../schemas/Activity/routine'));
+const General = mongoActivityDB.model('general', require('../../schemas/Activity/general'));
 const Comments = mongoActivityDB.model('comments', require('../../schemas/Activity/comments'));
 
 const deleteActivity = async (req, res) => {
   try {
-    let _idActivity = req.body._id;
+    let {_idActivity, type} = req.body;
     if (!_idActivity) {
       res.status(400).json({
         error: true,
@@ -12,12 +14,28 @@ const deleteActivity = async (req, res) => {
       });
     } else {
       const comments = await Comments.deleteMany({activityId: _idActivity});
-      const result = await Activity.deleteOne({_id: _idActivity});
-      res.status(200).json({
-        error: false,
-        message: "Activité a été supprimer avec succès",
-        data: result.deletedCount
-      })
+      if (type === 'intervention') {
+        const result = await Intervention.deleteOne({_id: _idActivity});
+        res.status(200).json({
+          error: false,
+          message: "Activité a été supprimer avec succès",
+          data: result.deletedCount
+        })
+      } else if (type === 'routine') {
+        const result = await Routine.deleteOne({_id: _idActivity});
+        res.status(200).json({
+          error: false,
+          message: "Activité a été supprimer avec succès",
+          data: result.deletedCount
+        })
+      } else if (type === 'general') {
+        const result = await General.deleteOne({_id: _idActivity});
+        res.status(200).json({
+          error: false,
+          message: "Activité a été supprimer avec succès",
+          data: result.deletedCount
+        })
+      }
     }
   } catch (error) {
     console.log(error);

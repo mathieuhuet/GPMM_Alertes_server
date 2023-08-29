@@ -4,9 +4,8 @@ const User = mongoUserDB.model('users', require('../../schemas/User/user'));
 
 
 const fetchUsersByDepartment = (req, res) => {
-  let {departement} = req.body;
-  User.find({departement: departement}, '_id departement email firstName lastName profileIconBackgroundColor profileIconColor role').exec().then(data => {
-    // if (data.length) === activity found
+  let {department} = req.body;
+  User.find({department: department}, '_id departement email firstName lastName profileIconBackgroundColor profileIconColor role').exec().then(data => {
     if (data.length) {
       res.status(200).json({
         error: false,

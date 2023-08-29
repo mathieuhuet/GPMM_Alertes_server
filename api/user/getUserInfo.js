@@ -7,7 +7,7 @@ const getUserInfo = (req, res) => {
     email: req.user.email,
     role: req.user.role,
     admin: req.user.admin,
-    departement: req.user.departement,
+    department: req.user.department,
     profileIconColor: req.user.profileIconColor,
     profileIconBackgroundColor: req.user.profileIconBackgroundColor,
     profileIconPolice: req.user.profileIconPolice,

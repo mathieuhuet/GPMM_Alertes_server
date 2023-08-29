@@ -6,7 +6,7 @@ const userSchema = new Schema({
   lastName: String,
   email: String,
   role: String,
-  departement: String,
+  department: String,
   admin: Boolean,
   profileIconColor: String,
   profileIconBackgroundColor: String,
